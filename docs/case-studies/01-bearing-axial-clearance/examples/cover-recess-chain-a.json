@@ -1,0 +1,26 @@
+{
+  "project": {
+    "acceptance_limits": null,
+    "contributions": [
+      {
+        "dimension_id": "H",
+        "label": "H_L to H_R - proposed housing stop separation at 20 C",
+        "lower_deviation": "-0.100",
+        "nominal": "14.700",
+        "sign": 1,
+        "upper_deviation": "0.100"
+      },
+      {
+        "dimension_id": "W",
+        "label": "R_L to R_R - outer-ring width; selected open SKF 6204 Explorer, October 2018 catalogue; current procurement unverified",
+        "lower_deviation": "-0.060",
+        "nominal": "14.000",
+        "sign": -1,
+        "upper_deviation": "0.000"
+      }
+    ],
+    "name": "Preliminary Case Study 01 - Cover-Recess - Chain A - Total axial end space",
+    "unit": "mm"
+  },
+  "schema_version": 2
+}

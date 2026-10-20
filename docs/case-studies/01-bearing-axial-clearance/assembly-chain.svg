@@ -1,0 +1,96 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="980" viewBox="0 0 1120 980" role="img" aria-labelledby="title description">
+  <title id="title">Locating and non-locating supports and the axial end-space chain</title>
+  <desc id="description">Preliminary engineering case study. Original schematic, not to scale or a manufacturing drawing. Bearing A locates the shaft. Bearing B has its inner ring retained on the shaft and its outer ring intended to slide in the housing; sliding fit and initial position are unverified. The enlarged one-dimensional envelope defines housing stops H_L and H_R and outer-ring faces R_L and R_R. H is stop separation, W is outer-ring width, P is the assumed left gap, and g_R is right gap. C equals H minus W. The alternative shifts only H_R outward by 0.200 millimetres.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto-start-reverse" markerUnits="strokeWidth">
+      <path d="M 8 4 L 0 0 L 0 8 Z" fill="#254965"/>
+    </marker>
+    <marker id="motion" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto-start-reverse" markerUnits="strokeWidth">
+      <path d="M 8 4 L 0 0 L 0 8 Z" fill="#087f72"/>
+    </marker>
+    <style>
+      text { font-family: Arial, Helvetica, sans-serif; fill: #203449; font-size: 18px; }
+      .heading { font-size: 25px; font-weight: 700; }
+      .section { font-size: 21px; font-weight: 700; }
+      .small { font-size: 15px; }
+      .muted { fill: #536575; }
+      .dimension { stroke: #254965; stroke-width: 1.5; marker-start: url(#arrow); marker-end: url(#arrow); }
+      .guide { stroke: #a2afb9; stroke-width: 1; stroke-dasharray: 5 4; }
+      .housing { stroke: #254965; stroke-width: 4; fill: none; }
+    </style>
+  </defs>
+  <rect width="1120" height="980" fill="#fff"/>
+  <text x="48" y="44" class="heading">Case Study 01 — Bearing B axial end space</text>
+  <text x="48" y="73" class="small muted">Preliminary engineering case study · mm · Schematic, not to scale · Not a manufacturing drawing</text>
+
+  <text x="48" y="119" class="section">1. Proposed support architecture</text>
+  <line x1="220" y1="157" x2="850" y2="157" class="dimension"/>
+  <text x="435" y="147">150 mm station spacing (proposed)</text>
+  <line x1="220" y1="164" x2="220" y2="286" class="guide"/>
+  <line x1="850" y1="164" x2="850" y2="286" class="guide"/>
+  <rect x="90" y="228" width="940" height="38" fill="#cbd3da" stroke="#6d7e8b" stroke-width="2"/>
+  <text x="492" y="253">Rotating shaft</text>
+
+  <path d="M 159 206 L 159 177 L 281 177 L 281 206 M 159 283 L 159 314 L 281 314 L 281 283" class="housing"/>
+  <rect x="186" y="188" width="68" height="29" rx="3" fill="#9dbad1" stroke="#254965"/>
+  <rect x="186" y="277" width="68" height="25" rx="3" fill="#9dbad1" stroke="#254965"/>
+  <circle cx="203" cy="222" r="8" fill="white" stroke="#254965"/>
+  <circle cx="237" cy="222" r="8" fill="white" stroke="#254965"/>
+  <circle cx="203" cy="271" r="8" fill="white" stroke="#254965"/>
+  <circle cx="237" cy="271" r="8" fill="white" stroke="#254965"/>
+  <rect x="186" y="231" width="68" height="32" fill="#7f98ac" stroke="#254965"/>
+  <path d="M 180 188 L 180 215 M 260 188 L 260 215 M 180 277 L 180 302 M 260 277 L 260 302" stroke="#254965" stroke-width="4"/>
+  <text x="120" y="347" class="section">A · Locating support</text>
+  <text x="100" y="373" class="small">Both rings retained axially; bearing</text>
+  <text x="100" y="395" class="small">endplay/elastic movement still matters.</text>
+
+  <path d="M 770 207 L 770 177 L 950 177 L 950 207 M 770 283 L 770 314 L 950 314 L 950 283" class="housing"/>
+  <rect x="816" y="188" width="68" height="29" rx="3" fill="#9dbad1" stroke="#254965"/>
+  <rect x="816" y="277" width="68" height="25" rx="3" fill="#9dbad1" stroke="#254965"/>
+  <circle cx="833" cy="222" r="8" fill="white" stroke="#254965"/>
+  <circle cx="867" cy="222" r="8" fill="white" stroke="#254965"/>
+  <circle cx="833" cy="271" r="8" fill="white" stroke="#254965"/>
+  <circle cx="867" cy="271" r="8" fill="white" stroke="#254965"/>
+  <rect x="816" y="231" width="68" height="32" fill="#7f98ac" stroke="#254965"/>
+  <path d="M 809 232 L 809 262 M 891 232 L 891 262" stroke="#254965" stroke-width="4"/>
+  <line x1="795" y1="331" x2="905" y2="331" stroke="#087f72" stroke-width="2" marker-start="url(#motion)" marker-end="url(#motion)"/>
+  <text x="737" y="365" class="section">B · Non-locating support</text>
+  <text x="717" y="391" class="small">Inner ring retained; outer ring intended to slide.</text>
+  <text x="717" y="413" class="small">Stops must remain outside required motion.</text>
+  <line x1="425" y1="304" x2="595" y2="304" stroke="#087f72" stroke-width="2" marker-end="url(#motion)"/>
+  <text x="449" y="331" class="small">Positive axial direction +x</text>
+
+  <line x1="48" y1="449" x2="1072" y2="449" stroke="#d1d9df"/>
+  <text x="48" y="486" class="section">2. Enlarged axial envelope at the outer-ring radius</text>
+  <text x="48" y="514" class="small muted">Only stop/ring face positions are modeled. Shaft and inner ring omitted; radial fit not drawn.</text>
+  <line x1="120" y1="559" x2="960" y2="559" class="dimension"/>
+  <text x="415" y="548">H = 14.500 ± 0.100</text>
+  <line x1="120" y1="568" x2="120" y2="821" class="guide"/>
+  <line x1="260" y1="582" x2="260" y2="821" class="guide"/>
+  <line x1="760" y1="582" x2="760" y2="821" class="guide"/>
+  <line x1="960" y1="568" x2="960" y2="821" class="guide"/>
+  <text x="98" y="602">H_L</text>
+  <text x="238" y="602">R_L</text>
+  <text x="738" y="602">R_R</text>
+  <text x="938" y="602">H_R</text>
+  <line x1="120" y1="619" x2="960" y2="619" class="housing"/>
+  <line x1="120" y1="619" x2="120" y2="714" class="housing"/>
+  <line x1="960" y1="619" x2="960" y2="714" class="housing"/>
+  <rect x="260" y="632" width="500" height="80" fill="#d9e5ef" stroke="#254965" stroke-width="2"/>
+  <text x="398" y="679">Bearing B outer ring</text>
+  <line x1="120" y1="737" x2="260" y2="737" class="dimension"/>
+  <text x="133" y="765" class="small">P = g_L</text>
+  <text x="125" y="787" class="small">0.200 ± 0.050*</text>
+  <line x1="760" y1="737" x2="960" y2="737" class="dimension"/>
+  <text x="792" y="765" class="small">g_R = H − W − P</text>
+  <text x="804" y="787" class="small">Nominal 0.300*</text>
+  <line x1="260" y1="804" x2="760" y2="804" class="dimension"/>
+  <text x="376" y="832">W = 14.000 (−0.060 / 0.000)</text>
+  <line x1="1007" y1="619" x2="1007" y2="714" stroke="#ac6218" stroke-width="3" stroke-dasharray="7 4"/>
+  <text x="982" y="745" class="small" fill="#ac6218">+0.200</text>
+
+  <text x="48" y="880">Total C = H − W = g_L + g_R</text>
+  <text x="48" y="907" class="small">* P is an illustrative cold assembled-position assumption. Total C alone does not locate the ring.</text>
+  <text x="48" y="932" class="small">Dashed right stop: cover-recess alternative moves H_R only; H_L and the assumed P remain unchanged.</text>
+  <text x="48" y="956" class="small muted">20 °C reference · Fit and initial position unverified; separate thermal face/width checks required.</text>
+</svg>

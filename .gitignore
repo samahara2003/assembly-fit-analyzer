@@ -1,0 +1,28 @@
+# Local Python environments and generated artifacts
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+.DS_Store
+
+# Local credentials and agent configuration; examples and reports stay publishable
+.env
+.env.*
+!.env.example
+.streamlit/secrets.toml
+.streamlit/secrets.*.toml
+.aws/
+.codex/
+.agents/
+*.pem
+*.key
+
+# Locally regenerated case-study reports
+case-study-reports/

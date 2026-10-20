@@ -1,0 +1,37 @@
+[build-system]
+requires = ["setuptools>=77.0.3"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "assembly-fit-analyzer"
+version = "1.0.0"
+description = "Exact Decimal worst-case tolerance analysis for linear 1D dimensional chains."
+keywords = ["mechanical-engineering", "tolerance-analysis", "worst-case", "decimal"]
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
+requires-python = ">=3.11"
+dependencies = []
+
+[project.urls]
+Repository = "https://github.com/samahara2003/assembly-fit-analyzer"
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "ruff>=0.6", "pypdf>=6,<7"]
+reports = ["reportlab>=4.4,<5"]
+ui = ["streamlit>=1.66,<2", "reportlab>=4.4,<5"]
+browser = ["playwright>=1.64,<2"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "--import-mode=importlib"
+
+[tool.ruff]
+target-version = "py311"
+line-length = 88
+
+[tool.ruff.lint]
+select = ["E", "F", "I"]

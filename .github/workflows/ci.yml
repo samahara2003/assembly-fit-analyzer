@@ -1,0 +1,103 @@
+name: Verification
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  checks:
+    name: Tests, artifacts and wheel (Python 3.14)
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: '3.14'
+          cache: pip
+          cache-dependency-path: requirements/ci.txt
+      - name: Install pinned verification environment
+        run: |
+          python -m pip install -r requirements/ci.txt
+          python -m pip install --no-build-isolation -c requirements/ci.txt -e '.[dev,ui,browser]'
+          python -m pip check
+      - name: Lint and format
+        run: |
+          python -m ruff check .
+          python -m ruff format --check .
+      - name: Non-browser tests (Chrome runs in separate job)
+        run: python -m pytest --ignore=tests/test_browser_safety.py
+      - name: Independent worksheet and bundled artifact integrity
+        run: |
+          python docs/case-studies/01-bearing-axial-clearance/verify_calculations.py
+          python tools/verify_case_study_artifacts.py
+      - name: Build, inspect and install wheel
+        run: |
+          python -m pip wheel --no-build-isolation --no-deps --wheel-dir dist .
+          python -m zipfile -t dist/*.whl
+          python -m pip install --force-reinstall --no-deps dist/*.whl
+      - name: Smoke test installed wheel outside the source tree
+        working-directory: ${{ runner.temp }}
+        run: |
+          python - <<'PY'
+          from importlib.metadata import version
+          from assembly_fit_analyzer.calculations import analyze_project
+          from assembly_fit_analyzer.domain import AnalysisProject, DimensionContribution
+
+          assert version("assembly-fit-analyzer") == "1.0.0"
+          project = AnalysisProject("Wheel smoke", "mm", [
+              DimensionContribution("A", "Spacer", "1.000", "0.000", "0.000", 1)
+          ])
+          result = analyze_project(project)
+          assert str(result.nominal) == "1.000" and result.passes is None
+          PY
+
+  browser:
+    name: Six Chrome regressions (Python 3.14)
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      AFA_BROWSER_URL: http://127.0.0.1:8507
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: '3.14'
+          cache: pip
+          cache-dependency-path: requirements/ci.txt
+      - name: Install pinned verification environment and Chrome
+        run: |
+          python -m pip install -r requirements/ci.txt
+          python -m pip install --no-build-isolation -c requirements/ci.txt -e '.[dev,ui,browser]'
+          python -m pip check
+          python -m playwright install --with-deps chrome
+          python -c 'import playwright.sync_api'
+          google-chrome --version
+      - name: Start Streamlit and run all six browser tests
+        shell: bash
+        run: |
+          python -m streamlit run streamlit_app.py --server.headless true --server.address 127.0.0.1 --server.port 8507 --server.fileWatcherType none > "$RUNNER_TEMP/streamlit-ci.log" 2>&1 &
+          app_pid=$!
+          trap 'kill "$app_pid" 2>/dev/null || true' EXIT
+          for attempt in {1..60}; do
+            if curl --fail --silent "$AFA_BROWSER_URL/_stcore/health"; then
+              break
+            fi
+            sleep 1
+          done
+          if ! curl --fail --silent "$AFA_BROWSER_URL/_stcore/health"; then
+            cat "$RUNNER_TEMP/streamlit-ci.log"
+            exit 1
+          fi
+          python -m pytest tests/test_browser_safety.py -v
